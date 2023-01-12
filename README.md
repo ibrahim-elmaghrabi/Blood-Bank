@@ -1,4 +1,7 @@
-<p align="center"><a href="#" target="_blank"><img src="public/images/Icon.png" width="200" height="200" alt="Laravel Logo">Blood Bank</a></p>
+<p align="center">
+    <img src="public/images/Icon.png" width="200" height="200" alt="Bloodbank Logo">
+    <p>Blood Bank</p>
+</p>
 
 ## About Blood Bank
 
