@@ -1,10 +1,12 @@
-<p align="center"><a href="#" target="_blank"><img src="https://drive.google.com/file/d/1_a8RViInIAjwCFoQSev4Zq7ztw4UYGlL/view?usp=sharing" width="400" alt="Laravel Logo"></a></p>
-
+<p align="center">
+  Blood Bank
+  <img src="https://drive.google.com/file/d/1_a8RViInIAjwCFoQSev4Zq7ztw4UYGlL/view?usp=share_link" width="350" alt="accessibility text">
+</p>
 ## About Blood Bank
 
 Blood Bank is an application that serves blood donors and cases that need to donate blood periodically.The donation is requested through the application with the addition of all the details of the case, and the application sends notifications to all appropriate donors to the case according to their notification settings.The donor can browse donation cases, view their details, and communicate with cases through the attached data.The application contains a section for articles for medical education for all application users.
 
-## Technologies
+## Technologies Used
 
 - **[Vehikl](https://vehikl.com/)**
 - **[Tighten Co.](https://tighten.co)**
