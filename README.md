@@ -1,6 +1,6 @@
 <p align="center">
     <img src="public/images/Icon.png" width="200" height="200" alt="Bloodbank Logo">
-    # blood bank
+    <h1>Blood Bank</h1>
 </p>
 
 ## About Blood Bank
