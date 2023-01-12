@@ -9,7 +9,7 @@ Blood Bank is an application that serves blood donors and cases that need to don
 
 ## Technologies Used
 
-- **[Vehikl](https://vehikl.com/)**
+- **LAravel**
 - **[Tighten Co.](https://tighten.co)**
 - **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
 - **[64 Robots](https://64robots.com)**
