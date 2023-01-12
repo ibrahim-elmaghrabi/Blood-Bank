@@ -1,6 +1,6 @@
 <p align="center">
   Blood Bank
-  <img src="https://drive.google.com/file/d/1_a8RViInIAjwCFoQSev4Zq7ztw4UYGlL/view?usp=share_link" width="350" alt="accessibility text">
+  <a href="https://drive.google.com/uc?export=view&id=<FILEID>"><img src="https://drive.google.com/file/d/1_a8RViInIAjwCFoQSev4Zq7ztw4UYGlL/view?usp=sharing?export=view&id=<FILEID>" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture" />
 </p>
 ## About Blood Bank
 
