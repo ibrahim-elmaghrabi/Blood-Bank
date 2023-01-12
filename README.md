@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/images/Icon.png" width="400" height="200" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/images/Icon.png" width="300" height="300" alt="Laravel Logo"></a></p>
 
 ## About Blood Bank
 
