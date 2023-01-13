@@ -20,6 +20,12 @@ Blood Bank is an application that serves blood donors and cases that need to don
 
 ![Screenshot from 2023-01-13 03-56-35](https://user-images.githubusercontent.com/87943179/212221619-22de9fa5-5a22-4b37-a7db-b3b9984939fb.png)
 
+![Screenshot from 2023-01-13 03-55-45](https://user-images.githubusercontent.com/87943179/212221989-e4192652-eeba-4f9b-9f26-79cc29ab39b5.png)
 
+![Screenshot from 2023-01-13 03-56-10](https://user-images.githubusercontent.com/87943179/212222061-49001198-e285-4063-a709-5cb3e5fe5164.png)
+
+![Screenshot from 2023-01-13 03-55-20](https://user-images.githubusercontent.com/87943179/212222154-b5e8e6c8-f5ef-4872-8ce7-1286f3358fe4.png)
+## Front-end
+![Screenshot from 2023-01-13 04-08-59](https://user-images.githubusercontent.com/87943179/212222249-c96dc4ec-855d-424e-89ee-e46b82f2e69f.png)
 
 
