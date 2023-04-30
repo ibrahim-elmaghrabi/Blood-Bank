@@ -15,21 +15,14 @@ class ProfileResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id" => (string) $this->id,
-            "attributes" => [
-                "created_at" => $this->created_at,
-                "updated_at" => $this->updated_at,
-                "name" => $this->name,
-                "email" => $this->email,
-                "phone" => $this->phone,
-                "date of birth" => $this->d_o_b,
-                "last donation date" => $this->last_donation_date,
-                "active" => $this->active,
-            ],
-            "relationships" => [
-                "city" => new CityResource($this->city),
-                "blood type" => new BloodTypeResource($this->bloodType)
-            ]
+            "id" => $this->id,
+            "name"=> $this->name,
+            "email"=> $this->email,
+            "phone"=> $this->phone,
+            "date_of_birth" => $this->d_o_b,
+            "last_donation_date"=> $this->last_donation_date,
+            "city"=> CityResource::make($this->city),
+            "blood_type" => BasicDataResource::make($this->bloodType)
         ];
     }
 }

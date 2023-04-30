@@ -8,18 +8,18 @@ use App\Models\DonationRequest;
 
 class DonationController extends Controller
 {
-     
+
     public function __construct()
     {
          $this->middleware('permission:donation-list' , ['only' => ['index']] );
          $this->middleware('permission:donation-show' , ['only' => ['show']]);
          $this->middleware('permission:donation-delete',['only' => ['destroy']] );
-        
     }
+
     public function index()
     {
         $donationRequests = DonationRequest::paginate(20);
-        return view('admin.donations.index', ['donationRequests' => $donationRequests]);
+        return view('admin.donations.index', compact('donationRequests'));
     }
 
 
@@ -30,7 +30,7 @@ class DonationController extends Controller
         ]);
 
     }
-     
+
     public function destroy(DonationRequest $donationRequest)
     {
         $donationRequest->delete();

@@ -2,22 +2,26 @@
 
 namespace App\Models;
 
+use App\Models\Client;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
-    protected $table = 'posts';
-    public $timestamps = true;
-    protected $fillable = array('title', 'image', 'content', 'category_id');
+    use HasFactory;
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+    
     protected $appends = ['is_favourite'];
 
     public function getIsFavouriteAttribute()
     {
         $user = auth('sanctum')->user();
-        if(!$user) {
+        if (!$user) {
             $user = auth('client-web')->user();
         }
-        if($user) {
+        if ($user) {
             $check = $this->clients()->find($user->id);
             if ($check) {
                 return true;
@@ -28,11 +32,11 @@ class Post extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(Category::class);
     }
 
     public function clients()
     {
-        return $this->morphToMany('App\Models\Client', 'clientable');
+        return $this->morphToMany(Client::class, 'clientable');
     }
 }

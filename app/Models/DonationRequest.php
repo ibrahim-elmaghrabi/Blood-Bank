@@ -2,23 +2,24 @@
 
 namespace App\Models;
 
+use App\Models\{City, Client, BloodType, Notification};
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DonationRequest extends Model
 {
-    protected $table = 'donation_requests';
-    public $timestamps = true;
-    protected $fillable = array('name', 'phone', 'city_id', 'hospital_name', 'blood_type_id', 'age', 'bags_num',
-                    'hospital_address', 'details', 'latitude', 'longitude', 'client_id');
+    use HasFactory;
+
+    protected  $guarded = ['id', 'created_at', 'updated_at'];
 
     public function client()
     {
-        return $this->belongsTo('App\Models\Client');
+        return $this->belongsTo(Client::class);
     }
 
     public function notifications()
     {
-        return $this->hasMany('App\Models\Notification');
+        return $this->hasMany(Notification::class);
     }
 
     public function city()

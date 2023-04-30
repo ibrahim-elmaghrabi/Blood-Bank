@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\BasicDataResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CityResource extends JsonResource
@@ -15,15 +16,9 @@ class CityResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id" => (string) $this->id,
-            "attributes" => [
-                "created_at" => $this->created_at,
-                "updated_at" => $this->updated_at,
-                "name" => $this->name,
-            ],
-            "relationships" => [
-                "governorate" => new CityResource($this->governorate)
-            ]
+            "id" =>$this->id,
+            "name" => $this->name,
+            "governorate" => BasicDataResource::make($this->governorate)
         ];
     }
 }

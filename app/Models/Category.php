@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
-    protected $table = 'categories';
-    public $timestamps = true;
-    protected $fillable = array('name');
+    use HasFactory;
+    
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function posts()
     {
-        return $this->hasMany('App\Models\Post');
+        return $this->hasMany(Post::class);
     }
 }

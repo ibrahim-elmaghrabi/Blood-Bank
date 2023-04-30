@@ -4,13 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingsTable extends Migration
+return new class () extends Migration
 {
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->id();
             $table->text('notification_settings_text');
             $table->text('about_app');
             $table->text('who_we_are');
@@ -24,12 +23,13 @@ class CreateSettingsTable extends Migration
             $table->string('fax');
             $table->string('app_store_link');
             $table->string('play_store_link');
-            
+            $table->timestamps();
+
         });
     }
 
     public function down()
     {
-        Schema::drop('settings');
+        Schema::dropIfExists('settings');
     }
-}
+};

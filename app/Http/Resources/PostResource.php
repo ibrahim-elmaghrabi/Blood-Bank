@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\BasicDataResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -15,18 +16,12 @@ class PostResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id" => (string) $this->id,
-            "attributes" => [
-                "title" => $this->title,
-                "image" => $this->image,
-                "content" => $this->content,
-                "is_favorite" => $this->is_favourite,
-                "created_at" => $this->created_at,
-                "updated_at" => $this->updated_at
-            ],
-            "relationships" => [
-                "category" => new CategoryResource($this->category),
-            ]
+            "id" => $this->id,
+            "title" => $this->title,
+            "image" => $this->image,
+            "content" => $this->content,
+            "is_favorite" => $this->is_favourite,
+            "category" => BasicDataResource::make($this->category),
         ];
     }
 }

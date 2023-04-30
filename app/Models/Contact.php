@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Contact extends Model
 {
-    protected $table = 'contacts';
-    public $timestamps = true;
-    protected $fillable = array('name', 'email', 'phone', 'subject', 'message');
+    use HasFactory;
+    
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }

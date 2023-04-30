@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDonationRequestsTable extends Migration
+return new class () extends Migration
 {
     public function up()
     {
@@ -28,6 +28,6 @@ class CreateDonationRequestsTable extends Migration
 
     public function down()
     {
-        Schema::drop('donation_requests');
+        Schema::dropIfExists('donation_requests');
     }
-}
+};

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContactsTable extends Migration
+return new class () extends Migration
 {
     public function up()
     {
@@ -21,6 +21,6 @@ class CreateContactsTable extends Migration
 
     public function down()
     {
-        Schema::drop('contacts');
+        Schema::dropIfExists('contacts');
     }
-}
+};

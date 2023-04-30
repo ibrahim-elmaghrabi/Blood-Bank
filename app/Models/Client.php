@@ -2,70 +2,59 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\{City, Post, BloodType, Governorate, Notification, DonationRequest};
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Client  extends Authenticatable
 {
+    use HasApiTokens, HasFactory;
 
-    use HasApiTokens;
-    protected $table = 'clients';
-    public $timestamps = true;
-    protected $fillable = array(
-        'name',
-        'phone',
-        'password',
-        'email',
-        'blood_type_id',
-        'd_o_b',
-        'last_donation_date',
-        'city_id',
-        'active'
-     );
-
+    protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $guard = 'client-web';
 
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = \bcrypt($password);
+    }
 
-    
     public function bloodType()
     {
-        return $this->belongsTo('App\Models\BloodType');
+        return $this->belongsTo(BloodType::class);
     }
 
     public function city()
     {
-        return $this->belongsTo('App\Models\City');
+        return $this->belongsTo(City::class);
     }
 
     public function requests()
     {
-        return $this->hasMany('App\Models\DonationRequest');
+        return $this->hasMany(DonationRequest::class);
     }
 
     public function bloodTypes()
     {
-        return $this->morphedByMany('App\Models\BloodType', 'clientable');
+        return $this->morphedByMany(BloodType::class, 'clientable');
     }
 
     public function governorates()
     {
-        return $this->morphedByMany('App\Models\Governorate', 'clientable');
+        return $this->morphedByMany(Governorate::class, 'clientable');
     }
 
     public function posts()
     {
-        return $this->morphedByMany('App\Models\Post', 'clientable');
+        return $this->morphedByMany(Post::class, 'clientable');
     }
- 
 
     public function notifications()
     {
-        return $this->morphedByMany('App\Models\Notification', 'clientable')->withPivot('is_read');
+        return $this->morphedByMany(Notification::class, 'clientable')->withPivot('is_read');
     }
- 
 
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 }

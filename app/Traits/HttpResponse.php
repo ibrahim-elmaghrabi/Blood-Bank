@@ -5,37 +5,31 @@ namespace App\Traits;
 trait HttpResponse
 {
 
-    public function success($data, $token, $code = 200)
+    public function success(bool $status= true, string $message, mixed $data = null , $code= 201 )
     {
         return response()->json([
-            'status' => 'Request was successful ',
-            'token' => $token,
-            'data' => $data,
+            'status' => $status,
+            'message' => $message,
+            'data' => $data
+        ], $code);
+    }
 
+    public function error(bool $status= false, string $message, $code)
+    {
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+        ], $code);
+    }
+
+    public function apiResponse(bool $status= true, string $message, $code = 201)
+    {
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
         ], $code);
 
     }
-
-    public function error($data, $message, $code)
-    {
-        return response()->json([
-            'status' => 'Error has occurred... ',
-            'message' => $message,
-            'data' => $data,
-
-        ], $code);
-
-    }
-    private function apiResponse($status, $message, $data = null)
-    {
-        $response = [
-            'status'  => $status,
-            'message' => $message,
-            'data'    => $data,
-        ];
-        return response()->json($response);
-    }
-
 
 
 

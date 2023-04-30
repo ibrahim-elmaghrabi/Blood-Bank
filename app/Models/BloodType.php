@@ -2,22 +2,25 @@
 
 namespace App\Models;
 
+use App\Models\Client;
+use App\Models\DonationRequest;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BloodType extends Model
 {
-    protected $table = 'blood_types';
-    public $timestamps = true;
-    protected $fillable = array('name');
+    use HasFactory;
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function clients()
     {
-        return $this->hasMany('App\Models\Client');
+        return $this->hasMany(Client::class);
     }
 
     public function bloodType_clients()
     {
-        return $this->morphToMany('App\Models\Client', 'clientable');
+        return $this->morphToMany(Client::class, 'clientable');
     }
 
     public function donations()

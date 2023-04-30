@@ -19,11 +19,9 @@ class GovernorateFactory extends Factory
     protected $model = Governorate::class;
     public function definition()
     {
-        
+
             return [
             'name' => $this->faker->unique()->city(),
-             
-        
         ];
     }
 }

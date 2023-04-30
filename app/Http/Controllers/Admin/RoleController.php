@@ -2,72 +2,57 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RoleRequest;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
 
     public function __construct()
     {
-         $this->middleware('permission:role-list' , ['only' => ['index']] );
-         $this->middleware('permission:role-create' , ['only' => ['create' , 'store']] );
-         $this->middleware('permission:role-edit' , ['only' => ['edit' , 'update']] );
-         $this->middleware('permission:role-delete' , ['only' => ['destroy']] );
-        
+         $this->middleware('permission:role-list', ['only' => ['index']]);
+         $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
+         $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
+         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
      public function index()
     {
         $roles = Role::paginate(20);
-        return view('admin.roles.index', ['roles' => $roles]);
+        return view('admin.roles.index', compact('roles'));
     }
 
-    
     public function create()
     {
         $permissions = Permission::all();
-        return view('admin.roles.create', ['permissions' => $permissions]);
+        return view('admin.roles.create', compact('permissions'));
     }
 
-     
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|unique:roles,name' ,
-            'permission_list' => 'required|array'
-        ]);
-        $role = Role::create($data);
-        $role->permissions()->attach($data['permission_list']);
+        $role = Role::create($request->validated());
+        $role->permissions()->attach($request['permission_list']);
         return redirect()->route('roles.index')->with('status', 'Role Added Successfully');
     }
 
-    
     public function edit(Role $role)
     {
-        $permissions = Permission::all();
+        $permissions = Permission::paginate(20);
         return view('admin.roles.edit', ['role' => $role ,  'permissions' => $permissions ] );
     }
 
-  
-    public function update(Request $request, Role $role)
+    public function update(RoleRequest $request, Role $role)
     {
-        $data = $request->validate([
-            'name' => 'required|unique:roles,name,'.$role->id  ,
-            'permission_list' => 'required|array'
-        ]);
-        $role->update($data);
-        $role->permissions()->sync($data['permission_list']);
+        $role->update($request->validated());
+        $role->permissions()->sync($request['permission_list']);
         return redirect()->route('roles.index')->with('status', 'Role Updated Successfully');
-
     }
 
-    
     public function destroy(Role $role)
     {
         $role->delete();
         return redirect()->route('roles.index')->with('status', 'Role Deleted Successfully');
-
     }
 }

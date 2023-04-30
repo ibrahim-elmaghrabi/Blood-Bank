@@ -4,22 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+return new class () extends Migration
 {
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->id();
             $table->string('title');
             $table->string('image');
             $table->text('content');
-            $table->integer('category_id')->unsigned();
+            $table->foreignId('category_id');
+            $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::drop('posts');
+        Schema::dropIfExists('posts');
     }
-}
+};

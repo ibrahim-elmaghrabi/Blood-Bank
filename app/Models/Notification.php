@@ -2,21 +2,23 @@
 
 namespace App\Models;
 
+use App\Models\{Client, DonationRequest};
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Notification extends Model
 {
-    protected $table = 'notifications';
-    public $timestamps = true;
-    protected $fillable = array('title', 'content', 'donation_request_id');
+    use HasFactory;
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function request()
     {
-        return $this->belongsTo('App\Models\DonationRequest');
+        return $this->belongsTo(DonationRequest::class);
     }
 
     public function clients()
     {
-        return $this->morphToMany('App\Models\Client', 'clientable')->withPivot('is_read');
+        return $this->morphToMany(Client::class, 'clientable')->withPivot('is_read');
     }
 }

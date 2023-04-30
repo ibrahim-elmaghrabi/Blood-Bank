@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
     use HasRoles;
-    
+
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +25,8 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+   
 
     /**
      * The attributes that should be hidden for serialization.

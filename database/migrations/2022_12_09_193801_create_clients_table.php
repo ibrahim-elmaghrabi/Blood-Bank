@@ -4,29 +4,29 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientsTable extends Migration
+return new class () extends Migration
 {
     public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-            $table->string('name', 255);
-            $table->string('phone');
+            $table->id();
+            $table->string('name');
+            $table->string('phone')->unique();
             $table->string('password');
-            $table->string('email');
-            $table->integer('blood_type_id')->unsigned();
+            $table->string('email')->unique();
+            $table->foreignId('blood_type_id');
             $table->date('d_o_b');
             $table->date('last_donation_date');
-            $table->integer('city_id')->unsigned();
-            $table->boolean('active')->default(1);
+            $table->foreignId('city_id');
+            $table->boolean('active')->default(0);
             $table->string('pin_code')->nullable();
-            $table->string('api_token', 60)->unique()->nullable();
+            $table->string('client_token', 60)->unique()->nullable();
+            $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::drop('clients');
+        Schema::dropIfExists('clients');
     }
-}
+};

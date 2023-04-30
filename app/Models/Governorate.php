@@ -2,21 +2,24 @@
 
 namespace App\Models;
 
+use App\Models\City;
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Governorate extends Model
 {
-    protected $table = 'governorates';
-    public $timestamps = true;
-    protected $fillable = array('name');
+    use HasFactory;
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function cities()
     {
-        return $this->hasMany('App\Models\City');
+        return $this->hasMany(City::class);
     }
 
     public function clients()
     {
-        return $this->morphToMany('App\Models\Client', 'clientable');
+        return $this->morphToMany(Client::class, 'clientable');
     }
 }

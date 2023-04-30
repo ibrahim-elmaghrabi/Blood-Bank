@@ -18,7 +18,7 @@ class BloodTypeSeeder extends Seeder
         BloodType::create(['name' => 'A+']);
         BloodType::create(['name' => 'A-']);
         BloodType::create(['name' => 'B+']);
-        BloodType::create(['name' => 'B+']);
+        BloodType::create(['name' => 'B-']);
         BloodType::create(['name' => 'AB+']);
         BloodType::create(['name' => 'AB-']);
         BloodType::create(['name' => 'O+']);

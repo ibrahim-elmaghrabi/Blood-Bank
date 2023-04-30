@@ -2,36 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 
 class PasswordController extends Controller
 {
-    public function edit(){
+    public function edit()
+    {
         return view('admin.passwords.edit');
     }
 
-    public function update(Request $request , User $user){
-        $data = $request->validate([
-            'current_password' => 'required' ,
-            'password' => 'required|confirmed|min:8'
-        ]);
-        if(!\Hash::check($data['current_password'], auth()->user()->password)){
+    public function update(Request $request, User $user)
+    {
+        $data = $request->validated();
+        if (! Hash::check($data['current_password'], auth()->user()->password)) {
             return back()->with('status', 'Current password not correct');
-        }else{
-            $data['password'] = bcrypt($data['password']);
+        } else {
             $update = auth()->user()->update(['password' => $data['password'] ]);
-            if($update){
+            if ($update) {
                 return back()->with('status', 'Password Updated Successfully');
-            }else{
+            } else {
                 return back()->with('status', 'Error Happen please try Again');
             }
-
         }
-        
-         
-
     }
 }
