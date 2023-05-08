@@ -9,7 +9,7 @@ use App\Http\Resources\BloodTypeResource;
 
 class BloodTypeController extends Controller
 {
-    public function bloodTypes()
+    public function index()
     {
         return $this->success(message: "Success", data: BloodTypeResource::collection(BloodType::paginate(10)));
     }

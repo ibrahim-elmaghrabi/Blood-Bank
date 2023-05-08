@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Web\Auth\LoginRequest;
 
 class LoginClientController extends Controller
 {
@@ -13,24 +14,20 @@ class LoginClientController extends Controller
         $this->middleware('guest:client-web');
     }
 
-    public function clientLoginForm()
+    public function LoginForm()
     {
         return view('frontend.signin-account');
     }
 
-     public function clientLogin(Request $request)
+     public function Login(LoginRequest $request)
     {
-             $data = $request->validate([
-            'phone' => 'required',
-            'password' => 'required',
-        ]);
-
+        $data = $request->validated();
          if (Auth::guard('client-web')->attempt(['phone' => $data['phone'], 'password' => $data['password']])) {
             return redirect()->route('clients.home')->with('status', 'You Logged in! ');
          }
     }
 
-    public function clientLogout(Request $request)
+    public function Logout(Request $request)
     {
        Auth::guard('client-web')->logout();
        $request->session()->invalidate();

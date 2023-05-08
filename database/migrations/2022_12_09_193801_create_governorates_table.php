@@ -9,9 +9,9 @@ return new class () extends Migration
     public function up()
     {
         Schema::create('governorates', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->id();
             $table->string('name');
+            $table->timestamps();
         });
     }
 

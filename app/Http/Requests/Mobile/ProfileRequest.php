@@ -24,7 +24,13 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'name'=> ['required','string' , 'max:255'] ,
+            'email'=> ['required','email','unique:users,email'],
+            'phone'=> ['required','min:11', 'max:20'. 'unique:clients,phone'] ,
+            'd_o_b' => ['required', 'date_format:Y-m-d'],
+            'blood_type_id' => ['required', 'numeric', 'exists:blood_types,id'] ,
+            'city_id' => ['required', 'numeric', 'exists:cities,id'],
+            'last_donation_date' => ['required', 'date_format:Y-m-d'] ,
         ];
     }
 }

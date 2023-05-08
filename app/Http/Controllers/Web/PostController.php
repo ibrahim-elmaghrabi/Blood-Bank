@@ -18,46 +18,43 @@ class PostController extends Controller
     }
     public function index(Request $request)
     {
-        if(auth()->guard('client-web')->check())
-        {
+        if (auth()->guard('client-web')->check()) {
             $clientPosts = auth()->guard('client-web')->user()->posts()->pluck('posts.id')->toArray();
-        }else{
+        } else {
             $clientPosts = [];
         }
         $posts = Post::where(function ($query) use ($request) {
-        if ($request->has('category_id')) {
-            $query->where('category_id', $request->category_id);
-        }
-        if ($request->has('keyword')) {
-            $query->where(function ($query) use ($request) {
-                $query->where('title', 'like', '%'.$request->keyword.'%');
-                $query->orWhere('content', 'like', '%'.$request->keyword.'%');
-            });
-        }
+            if ($request->has('category_id')) {
+                $query->where('category_id', $request->category_id);
+            }
+            if ($request->has('keyword')) {
+                $query->where(function ($query) use ($request) {
+                    $query->where('title', 'like', '%' . $request->keyword . '%');
+                    $query->orWhere('content', 'like', '%' . $request->keyword . '%');
+                });
+            }
         })->paginate(3);
         $categories = Category::all();
-        return view('frontend.articles',
-         ['posts' => $posts, 'categories' => $categories, 'clientPosts' => $clientPosts ]);
+        return view(
+            'frontend.articles',
+            ['posts' => $posts, 'categories' => $categories, 'clientPosts' => $clientPosts]
+        );
     }
 
 
 
     public function show($id)
     {
-        if(auth()->guard('client-web')->check())
-        {
+        if (auth()->guard('client-web')->check()) {
             $clientPosts = auth()->guard('client-web')->user()->posts()->pluck('posts.id')->toArray();
-        }else{
+        } else {
             $clientPosts = [];
         }
         $posts = Post::latest()->take(5)->get();
-         return view('frontend.article-details', [
-            'post' => Post::findOrFail($id) ,
-            'posts' => $posts ,
+        return view('frontend.article-details', [
+            'post' => Post::findOrFail($id),
+            'posts' => $posts,
             'clientPosts' => $clientPosts
         ]);
     }
-
-
-
 }

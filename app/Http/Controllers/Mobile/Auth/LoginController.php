@@ -16,7 +16,7 @@ class LoginController extends Controller
         $request->validated($request->all());
         $client = Client::where('phone', $request->phone)->first() ;
         if (!$client || !Hash::check($request['password'], $client->password)) {
-            return $this->error(message: 'wrong phone or password', code: 401);
+            return $this->error(message: 'wrong phone or password', code: 404);
         }
          $token =$client->createToken('Api Token of' .$client->name)->plainTextToken ;
          return $this->success(message: 'success', data: new LoginResource($token));

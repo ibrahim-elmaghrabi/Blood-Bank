@@ -9,14 +9,13 @@ use App\Traits\HttpResponse;
 
 class NotificationController extends Controller
 {
-    use HttpResponse;
 
     /*
         *register-token,remove-token functions
          *for send Notification  from app to user
         *Attach user with device to send notification
     */
-                    
+
     public function registerToken(Request $request)
     {
         $data = $request->validate([

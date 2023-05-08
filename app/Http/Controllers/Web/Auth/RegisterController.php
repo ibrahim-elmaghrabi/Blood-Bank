@@ -17,7 +17,7 @@ class RegisterController extends Controller
         $this->middleware('guest:client-web');
     }
 
-    public function clientRegisterForm(Request $request)
+    public function create(Request $request)
       {
         $bloodTypes = BloodType::all();
         $governorates = Governorate::get(["name","id"]);
@@ -37,7 +37,7 @@ class RegisterController extends Controller
         return response()->json($data);
     }
 
-      public function clientRegister(RegisterRequest $request)
+      public function store(RegisterRequest $request)
     {
         $client = Client::create($request->validated());
         auth()->guard('client-web')->login($client);

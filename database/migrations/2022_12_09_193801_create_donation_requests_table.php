@@ -9,20 +9,20 @@ return new class () extends Migration
     public function up()
     {
         Schema::create('donation_requests', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+            $table->id();
             $table->string('name');
             $table->string('phone');
-            $table->integer('city_id')->unsigned();
+            $table->foreignId('city_id');
             $table->string('hospital_name');
-            $table->integer('blood_type_id')->unsigned();
+            $table->foreignId('blood_type_id');
             $table->string('age');
-            $table->integer('bags_num');
+            $table->string('bags_num');
             $table->string('hospital_address');
             $table->text('details');
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 10, 8)->nullable();
-            $table->integer('client_id')->unsigned();
+            $table->foreignId('client_id');
+            $table->timestamps();
         });
     }
 
