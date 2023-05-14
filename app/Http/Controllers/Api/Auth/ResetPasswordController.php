@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Mobile\Auth;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Models\Client;
 use App\Mail\ResetPassword;

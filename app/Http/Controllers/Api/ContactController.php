@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\mobile;
+namespace App\Http\Controllers\Api;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;

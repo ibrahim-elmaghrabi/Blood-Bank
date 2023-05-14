@@ -9,7 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Client  extends Authenticatable
 {
-    use HasApiTokens, HasFactory;
+    use HasApiTokens;
+    use HasFactory;
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $guard = 'client-web';

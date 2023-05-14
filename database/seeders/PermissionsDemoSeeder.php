@@ -19,6 +19,10 @@ class PermissionsDemoSeeder extends Seeder
         Permission::create(['name' => 'donation-updateStatus']);
         Permission::create(['name' => 'donation-show']);
         Permission::create(['name'  => 'donation-delete']);
+        Permission::create(['name' => 'bloodType-list']);
+        Permission::create(['name' => 'bloodType-updateStatus']);
+        Permission::create(['name' => 'bloodType-show']);
+        Permission::create(['name'  => 'bloodType-delete']);
 
     }
 }

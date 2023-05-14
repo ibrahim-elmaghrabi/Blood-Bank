@@ -20,7 +20,7 @@ class PostResource extends JsonResource
             "title" => $this->title,
             "image" => $this->image,
             "content" => $this->content,
-            "is_favorite" => $this->is_favourite,
+          //  "is_favorite" => $this->is_favourite,
             "category" => BasicDataResource::make($this->category),
         ];
     }

@@ -14,31 +14,28 @@ class ProfileController extends Controller
 
     public function edit($id)
     {
-        $client = Client::finOrFail($id);
-        return $this->success(message: 'Success', data: new profileResource($client));
+        $client = Client::with('bloodType', 'city')->findOrFail($id);
+        return $this->success(message: 'Success', data: profileResource::make($client));
     }
 
-    public function update(ProfileRequest $request, $id)
+    public function updateData(clientRequest $request)
     {
         $data = $request->validated();
-        $client = Client::finOrFail($id);
+        $client = Client::find(auth()->id());
         $client->update($data);
         return $this->apiResponse(1, 'Data Updated Successfully');
     }
 
-    public function changePassword(changePasswordRequest $request, $id)
+    public function changePassword(changePasswordRequest $request)
     {
         $data = $request->validated();
-        $client = Client::finOrFail($id);
-        if (Hash::check($data['new_password'], $client->password))
-        {
+        $client = Client::find(auth()->id());
+        if (Hash::check($data['password'], $client->password)) {
             $client->update(['password' => $data['new_password']]);
             return $this->success(message: 'Password Updated Successfully');
         } else {
             return  $this->error(message : 'wrong password', code: 404);
         }
-
-
     }
 
 }

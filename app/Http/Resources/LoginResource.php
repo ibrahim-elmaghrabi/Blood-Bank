@@ -15,7 +15,11 @@ class LoginResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'token' => $this->token
+            "name" => $this->name,
+            "email" => $this->email,
+            "phone" => $this->phone,
+            "blood_type" => BasicDataResource::make($this->bloodType),
+            '_token' => $this->_token
         ];
     }
 }

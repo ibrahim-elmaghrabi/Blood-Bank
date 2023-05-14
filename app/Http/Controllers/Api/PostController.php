@@ -16,14 +16,15 @@ class PostController extends Controller
             if ($request->has('category_id')) {
                 $query->where('category_id', $request->category_id);
             }
+
             if ($request->has('keyword')) {
                 $query->where(function ($query) use ($request) {
                     $query->where('title', 'like', '%'.$request->keyword.'%');
                     $query->orWhere('content', 'like', '%'.$request->keyword.'%');
                 });
             }
-        })->paginate(10);
-        return $this->success(message: 'success', data:PostResource::make($posts));
+        })->get();
+        return $this->success(message: 'success', data:PostResource::collection($posts));
     }
 
     public function show(Post $post)
@@ -37,9 +38,9 @@ class PostController extends Controller
         return $this->apiResponse(message: 'liked');
     }
 
-    public function favorites(Request $request)
+    public function favorites()
     {
-        $posts = $request->user()->posts()->latest()->paginate(10);
+        $posts = request()->user()->posts()->latest()->paginate(10);
         return $this->success(message: 'success', data: PostResource::collection($posts));
     }
 }

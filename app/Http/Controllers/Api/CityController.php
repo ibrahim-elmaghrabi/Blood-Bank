@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\mobile;
+namespace App\Http\Controllers\Api;
 
 use App\Models\City;
 use Illuminate\Http\Request;

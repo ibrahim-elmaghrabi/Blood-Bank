@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Mobile\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class RegisterRequest extends FormRequest
+class ClientRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,7 +32,7 @@ class RegisterRequest extends FormRequest
                 'blood_type_id' => ['required', 'numeric', 'exists:blood_types,id'] ,
                 'city_id' => ['required', 'numeric', 'exists:cities,id'],
                 'last_donation_date' => ['required', 'date_format:Y-m-d'] ,
-                'password' => ['required','string','confirmed'],
+
             ];
     }
 }

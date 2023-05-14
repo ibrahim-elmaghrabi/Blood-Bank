@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\BasicDataResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class DonationResource extends JsonResource
@@ -20,19 +21,15 @@ class DonationResource extends JsonResource
             "name" => $this->name,
             "phone" => $this->phone,
             "hospital_name" => $this->hospital_name,
-            "blood_type_id" => BasicDataResource::make($this->bl),
-            "blood_type" => BasicDataResource::make($this->bloodType),
             "age" => $this->age,
             "bags_num" => $this->bags_num,
             "hospital_address" => $this->hospital_address,
             "details" => $this->details,
             "latitude" => $this->latitude,
             "longitude"=> $this->longitude,
-            "client"=> BasicDataResource::make($this->client),
-            "city_id" => CityResource::make($this->city),
-            "city" => $this->relationLoaded('city')
-            ? new CityResource($this->city)
-            : null,//new CityResource($this->city),
+            "blood_type" =>  $this->relationLoaded('bloodType') ?  BasicDataResource::make($this->bloodType) : null,
+            "client"=>  $this->relationLoaded('client') ?  BasicDataResource::make($this->client) : null,
+            "city" => $this->relationLoaded('city') ?  CityResource::make($this->city) : null,
         ];
 
     }

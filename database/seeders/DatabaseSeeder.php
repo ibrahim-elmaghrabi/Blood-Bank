@@ -13,6 +13,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([BloodTypeSeeder::class,]);
+        $this->call([
+            BloodTypeSeeder::class,
+            SettingSeeder::class,
+            CategorySeeder::class,
+            GovernorateSeeder::class,
+            CitySeeder::class,
+            UserSeeder::class,
+            PostSeeder::class,
+            DonationRequestSeeder::class,
+        ]);
     }
 }

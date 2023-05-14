@@ -5,7 +5,7 @@ namespace App\Traits;
 trait HttpResponse
 {
 
-    public function success(bool $status= true, string $message, mixed $data = null , $code= 201 )
+    public function success(string $message, mixed $data = null , $code= 201, bool $status= true)
     {
         return response()->json([
             'status' => $status,
@@ -14,7 +14,7 @@ trait HttpResponse
         ], $code);
     }
 
-    public function error(bool $status= false, string $message, $code)
+    public function error(string $message, $code, bool $status= false)
     {
         return response()->json([
             'status' => $status,
@@ -22,11 +22,12 @@ trait HttpResponse
         ], $code);
     }
 
-    public function apiResponse(bool $status= true, string $message, $code = 201)
+    public function apiResponse(string $message, $code = 201, bool $status= true, mixed $data = null)
     {
         return response()->json([
             'status' => $status,
             'message' => $message,
+            'data' => $data,
         ], $code);
 
     }

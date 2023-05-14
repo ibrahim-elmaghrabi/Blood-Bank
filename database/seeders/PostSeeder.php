@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Setting;
+use App\Models\Post;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class SettingTable extends Seeder
+class PostSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class SettingTable extends Seeder
      */
     public function run()
     {
-        Setting::factory()->count(1)->create();
+        Post::factory()->count(5)->create();
     }
 }

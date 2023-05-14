@@ -25,7 +25,6 @@ class DonationRequestRequest extends FormRequest
     {
         return [
             'name'=> ['required', 'string', 'min:3', 'max:50'],
-            'email'=> ['required', 'email', 'unique:donation_requests,email,'.$this->id],
             'phone'=> ['required', 'min:8', 'max:20'],
             'age'=> ['required', 'string'] ,
             'city_id'=> ['required', 'numeric', 'exists:cities,id'],
