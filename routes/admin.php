@@ -1,17 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
-
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\
+{   CityController, HomeController, PostController, RoleController,  UserController,
+    ClientController, ContactController,SettingController, CategoryController, DonationController,
+    PasswordController, GovernorateController
+};
 
 Auth::routes();
-/* Dashboard Routes */
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/', [HomeController::class , 'index' ]);
     Route::resource('governorates', GovernorateController::class);
     Route::resource('cities', CityController::class);
-    Route::resource('categories',   CategoryController::class);
+    Route::resource('categories', CategoryController::class);
     Route::resource('posts', PostController::class);
     Route::resource('donations', DonationController::class);
     Route::resource('clients', ClientController::class);
