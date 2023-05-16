@@ -9,9 +9,9 @@ class ContactController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('permission:contact-list', ['only' => ['index']]);
-         $this->middleware('permission:contact-show', ['only' => ['show']]);
-         $this->middleware('permission:contact-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:contacts-list', ['only' => ['index']]);
+         $this->middleware('permission:contacts-show', ['only' => ['show']]);
+         $this->middleware('permission:contacts-delete', ['only' => ['destroy']]);
     }
 
     public function index()

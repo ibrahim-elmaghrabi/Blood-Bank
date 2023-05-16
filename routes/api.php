@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\
 {
      CityController, PostController, ProfileController, DonationController,  ContactController, CategoryController,
-      BloodTypeController, GovernorateController, Auth\LoginController,Auth\RegisterController,
-    };
+      BloodTypeController, GovernorateController, Auth\LoginController,Auth\RegisterController, Auth\ResetPasswordController,
+      Auth\VerificationController
+};
 use App\Http\Controllers\Api\NotificationController;
 
 /*
@@ -23,22 +24,23 @@ use App\Http\Controllers\Api\NotificationController;
 
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [LoginController::class, 'login']);
+Route::put('verification', VerificationController::class);
 Route::post('resetPassword', [ResetPasswordController::class, 'resetPassword']);
 Route::put('newPassword', [ResetPasswordController::class, 'newPassword']);
 
+Route::get('gov', [GovernorateController::class, 'index']);
+Route::get('cities', [CityController::class, 'index']);
+Route::get('categories', [CategoryController::class, 'index']);
+Route::get('bloodTypes', [BloodTypeController::class, 'index']);
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('gov', [GovernorateController::class, 'index']);
-    Route::get('cities', [CityController::class, 'index']);
-    Route::get('categories', [CategoryController::class, 'index']);
-    Route::get('bloodTypes', [BloodTypeController::class, 'index']);
-    
     Route::get('profile', [ProfileController::class, 'show']);
     Route::put('profile', [ProfileController::class, 'updateData']);
     Route::put('change_password', [ProfileController::class, 'changePassword']);
 
     Route::resource('posts', PostController::class)->except('create', 'update', 'store', 'destroy', 'show');
     Route::get('posts/client_favorites/{id}', [PostController::class, 'favorites']);
-    Route::post('posts/toggle_favorites/{post}', [PostController::class, 'toggleFavorite']);
+    Route::post('posts/toggle_favorites/{id}', [PostController::class, 'toggleFavorite']);
 
     Route::resource('donation_requests', DonationController::class)->except('create', 'edit', 'update', 'destroy');
     Route::post('contacts', [ContactController::class ,'store']);

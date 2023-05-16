@@ -37,22 +37,22 @@ class Client  extends Authenticatable
 
     public function bloodTypes()
     {
-        return $this->morphedByMany(BloodType::class, 'clientable');
+        return $this->morphedByMany(BloodType::class, 'clientable')->withTimestamps();
     }
 
     public function governorates()
     {
-        return $this->morphedByMany(Governorate::class, 'clientable');
+        return $this->morphedByMany(Governorate::class, 'clientable')->withTimestamps();
     }
 
     public function posts()
     {
-        return $this->morphedByMany(Post::class, 'clientable');
+        return $this->morphedByMany(Post::class, 'clientable')->withTimestamps();
     }
 
     public function notifications()
     {
-        return $this->morphedByMany(Notification::class, 'clientable')->withPivot('is_read');
+        return $this->morphedByMany(Notification::class, 'clientable')->withPivot('is_read')->withTimestamps();
     }
 
     protected $hidden = [

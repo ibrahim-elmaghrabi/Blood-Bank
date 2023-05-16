@@ -28,15 +28,9 @@ class DonationController extends Controller
         }
         })->paginate(5);
         $bloodTypes= BloodType::paginate(20);
-        $cities = City::all();
+        $cities = City::get();
 
-        return view('frontend.donation-requests',
-         [
-          'donations' => $donations,
-          'bloodTypes'=> $bloodTypes,
-          'cities'    => $cities ,
-
-        ]);
+        return view('frontend.donation-requests', compact('donations', 'bloodTypes', 'cities'));
     }
 
 
@@ -45,14 +39,10 @@ class DonationController extends Controller
         $bloodTypes= BloodType::all();
         $governorates= Governorate::get(["name","id"]);
         $cities = City::where("governorate_id", $request->governorate_id)->get(["name","id"]);
-        return view('frontend.create-donation', [
-            'bloodTypes'    => $bloodTypes ,
-            'governorates'  => $governorates ,
-            'cities'        => $cities
-        ]);
+        return view('frontend.create-donation', compact('bloodTypes', 'governorates', 'cities'));
     }
 
-     public function fetchCity(Request $request)
+    public function fetchCity(Request $request)
     {
          $data['cities'] = City::where('governorate_id', $request->governorate_id)->get(['name', 'id']);
          return response()->json($data);
@@ -82,9 +72,7 @@ class DonationController extends Controller
 
     public function show(DonationRequest $donationRequest)
     {
-        return view('frontend.inside-request', [
-            'donationRequest' => $donationRequest
-        ]);
+        return view('frontend.inside-request', compact('donationRequest'));
     }
 
 

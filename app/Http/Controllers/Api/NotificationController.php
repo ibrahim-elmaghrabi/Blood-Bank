@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Models\Token;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Traits\HttpResponse;
 
 class NotificationController extends Controller
 {
@@ -24,7 +23,7 @@ class NotificationController extends Controller
         ]);
         Token::where('token', $data['token'])->delete();
         $request->user()->tokens()->create($request->all());
-        return $this->apiResponse(1, 'Success Token is added');
+        return $this->apiResponse(message: 'Success Token is added');
     }
 
     /*  remove token function to remove token if the device or mobile log out from the app */
@@ -35,7 +34,7 @@ class NotificationController extends Controller
         ]);
 
         Token::where('token', $data['token'])->delete();
-        return $this->apiResponse(1, 'Success Token Removed');
+        return $this->apiResponse(message: 'Success');
     }
 
     public function notificationSettings(Request $request)
@@ -47,6 +46,6 @@ class NotificationController extends Controller
         ]);
          $governorates = $request->user()->governorates()->sync($data['governorates']);
          $bloodTypes  = $request->user()->bloodTypes()->sync($data['blood_types']);
-        return $this->apiResponse(1, 'Success', ["governorates" => $governorates, "blood_types" => $bloodTypes]);
+         return $this->success(message: 'Success', data: ["governorates" => $governorates, "blood_types" => $bloodTypes]);
     }
 }

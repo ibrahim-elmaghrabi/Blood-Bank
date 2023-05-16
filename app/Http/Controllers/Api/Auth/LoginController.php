@@ -16,7 +16,6 @@ class LoginController extends Controller
         $request->validated($request->all());
         $client = Client::with('bloodType')->where('phone', $request->phone)->first();
         if (! $client) {
-            dd('ss');
             return $this->error(message: 'wrong phone or password', code: 404);
         }
         $client->_token  = $client->createToken('clientToken')->plainTextToken;

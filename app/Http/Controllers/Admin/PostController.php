@@ -13,10 +13,10 @@ class PostController extends Controller
 
     public function __construct()
     {
-         $this->middleware('permission:post-list' , ['only' => ['index']] );
-         $this->middleware('permission:post-create' , ['only' => ['create' , 'store']] );
-         $this->middleware('permission:post-edit' , ['only' => ['edit' , 'update']] );
-         $this->middleware('permission:post-delete' , ['only' => ['destroy']] );
+         $this->middleware('permission:posts-list', ['only' => ['index']]);
+         $this->middleware('permission:posts-create', ['only' => ['create' , 'store']]);
+         $this->middleware('permission:posts-edit', ['only' => ['edit' , 'update']]);
+         $this->middleware('permission:posts-delete', ['only' => ['destroy']]);
     }
 
     public function index()

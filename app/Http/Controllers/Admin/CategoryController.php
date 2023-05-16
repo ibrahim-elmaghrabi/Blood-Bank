@@ -11,10 +11,10 @@ class CategoryController extends Controller
 {
     public function  __construct()
     {
-         $this->middleware('permission:category-list', ['only' => ['index']] );
-         $this->middleware('permission:category-create', ['only' => ['create' , 'store']] );
-         $this->middleware('permission:category-edit', ['only' => ['edit' , 'update']] );
-         $this->middleware('permission:category-delete', ['only' => ['destroy']] );
+         $this->middleware('permission:categories-list', ['only' => ['index']]);
+         $this->middleware('permission:categories-create', ['only' => ['create' , 'store']]);
+         $this->middleware('permission:categories-edit', ['only' => ['edit' , 'update']]);
+         $this->middleware('permission:categories-delete', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -39,7 +39,7 @@ class CategoryController extends Controller
         return view('admin.categories.edit', compact('category'));
     }
 
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->validated());
         return redirect()->route('categories.index')->with('status', 'Category Updated Successfully');

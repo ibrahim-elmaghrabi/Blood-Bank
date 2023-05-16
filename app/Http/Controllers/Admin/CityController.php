@@ -12,10 +12,10 @@ class CityController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('permission:city-list', ['only' => ['index']]);
-         $this->middleware('permission:city-create', ['only' => ['create' , 'store']]);
-         $this->middleware('permission:city-edit', ['only' => ['edit' , 'update']]);
-         $this->middleware('permission:city-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:cities-list', ['only' => ['index']]);
+         $this->middleware('permission:cities-create', ['only' => ['create' , 'store']]);
+         $this->middleware('permission:cities-edit', ['only' => ['edit' , 'update']]);
+         $this->middleware('permission:cities-delete', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -39,10 +39,7 @@ class CityController extends Controller
     public function edit(City $city)
     {
         $select = Governorate::pluck('name', 'id');
-        return view('admin.cities.edit', [
-            'city' => $city,
-            'select' => $select
-        ]);
+        return view('admin.cities.edit', compact('city', 'select'));
     }
 
     public function update(CityRequest $request, City $city)

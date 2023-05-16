@@ -18,7 +18,7 @@ class CityResource extends JsonResource
         return [
             "id" =>$this->id,
             "name" => $this->name,
-            "governorate" => BasicDataResource::make($this->governorate)
+            "governorate" =>  $this->relationLoaded('governorate') ?  BasicDataResource::make($this->governorate) : null,
         ];
     }
 }

@@ -20,7 +20,7 @@ class BloodType extends Model
 
     public function bloodType_clients()
     {
-        return $this->morphToMany(Client::class, 'clientable');
+        return $this->morphToMany(Client::class, 'clientable')->withTimestamps();
     }
 
     public function donations()

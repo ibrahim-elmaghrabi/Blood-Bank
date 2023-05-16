@@ -12,10 +12,10 @@ class GovernorateController extends Controller
 
     public function __construct()
     {
-         $this->middleware('permission:governorate-list' , ['only' => ['index']] );
-         $this->middleware('permission:governorate-create',['only' => ['create' , 'store']] );
-         $this->middleware('permission:governorate-edit' , ['only' => ['edit' , 'update']] );
-         $this->middleware('permission:governorate-delete',['only' => ['destroy']] );
+         $this->middleware('permission:governorates-list', ['only' => ['index']]);
+         $this->middleware('permission:governorates-create', ['only' => ['create' , 'store']]);
+         $this->middleware('permission:governorates-edit', ['only' => ['edit' , 'update']]);
+         $this->middleware('permission:governorates-delete', ['only' => ['destroy']]);
     }
 
     public function index()

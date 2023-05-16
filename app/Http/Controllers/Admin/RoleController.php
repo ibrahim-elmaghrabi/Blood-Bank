@@ -13,10 +13,10 @@ class RoleController extends Controller
 
     public function __construct()
     {
-         $this->middleware('permission:role-list', ['only' => ['index']]);
-         $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
-         $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
-         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:roles-list', ['only' => ['index']]);
+         $this->middleware('permission:roles-create', ['only' => ['create', 'store']]);
+         $this->middleware('permission:roles-edit', ['only' => ['edit', 'update']]);
+         $this->middleware('permission:roles-delete', ['only' => ['destroy']]);
     }
      public function index()
     {
@@ -40,7 +40,7 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         $permissions = Permission::paginate(20);
-        return view('admin.roles.edit', ['role' => $role ,  'permissions' => $permissions ] );
+        return view('admin.roles.edit', compact('role', 'permissions'));
     }
 
     public function update(RoleRequest $request, Role $role)

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Mobile\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResetPasswordRequest extends FormRequest
+class VerificationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,22 +23,9 @@ class ResetPasswordRequest extends FormRequest
      */
     public function rules()
     {
-        return $this->isMethod('POST') ? $this->forgetPassword() : $this->setPassword();
-    }
-
-    public function forgetPassword()
-    {
         return [
-            'phone'=> ['required', 'min:8', 'max:20', 'exists:clients,phone']
-        ];
-    }
-
-    public function setPassword()
-    {
-        return [
-            'pin_code' => ['required'],
             'client_token' => ['required', 'string'],
-            'password' => ['required', 'confirmed'],
+            'pin_code' => ['required', 'string'],
         ];
     }
 }

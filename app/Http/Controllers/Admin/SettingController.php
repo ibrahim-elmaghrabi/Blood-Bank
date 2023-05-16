@@ -11,7 +11,7 @@ class SettingController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('permission:settings-edit', ['only' => ['edit' , 'update']] );
+         $this->middleware('permission:settings-edit', ['only' => ['edit' , 'update']]);
 
     }
 
@@ -23,7 +23,8 @@ class SettingController extends Controller
 
     public function update(SettingRequest $request, Setting $setting)
     {
-        $setting->update($request->all());
+        $data = $request->validated();
+        $setting->update($data);
         return back()->with('status', 'Settings Updated Successfully');
     }
 

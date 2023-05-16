@@ -11,9 +11,9 @@ class DonationController extends Controller
 
     public function __construct()
     {
-         $this->middleware('permission:donation-list' , ['only' => ['index']] );
-         $this->middleware('permission:donation-show' , ['only' => ['show']]);
-         $this->middleware('permission:donation-delete',['only' => ['destroy']] );
+         $this->middleware('permission:donations-list', ['only' => ['index']]);
+         $this->middleware('permission:donations-show', ['only' => ['show']]);
+         $this->middleware('permission:donations-delete', ['only' => ['destroy']]);
     }
 
     public function index()
@@ -25,9 +25,8 @@ class DonationController extends Controller
 
     public function show($id)
     {
-         return view('admin.donations.show', [
-            'donationRequest' => DonationRequest::findOrFail($id)
-        ]);
+        $donationRequest = DonationRequest::findOrFail($id);
+         return view('admin.donations.show', compact('donationRequest'));
 
     }
 

@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return $this->success(message: "Success", data: BasicDataResource::collection(Category::paginate(10)));
+        return $this->success(message: "Success", data: BasicDataResource::collection(Category::simplePaginate(10)));
     }
 
 }

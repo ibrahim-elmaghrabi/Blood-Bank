@@ -11,7 +11,7 @@ class CityController extends Controller
 {
     public function index(Request $request)
     {
-        $cities = City::where(function ($query) use ($request) {
+        $cities = City::with('governorate')->where(function ($query) use ($request) {
             if ($request->has('governorate_id')) {
                 $query->where('governorate_id', $request->governorate_id);
             }

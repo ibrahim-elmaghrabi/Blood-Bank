@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\CategoryResource;
 use App\Http\Resources\PostResource;
 
 class PostController extends Controller
@@ -27,13 +26,15 @@ class PostController extends Controller
         return $this->success(message: 'success', data:PostResource::collection($posts));
     }
 
-    public function show(Post $post)
+    public function show($id)
     {
+        $post = Post::findOrFail($id);
         return $this->success(message: 'Success', data: PostResource::make($post));
     }
 
-    public function toggleFavorite(Request $request, Post $post)
+    public function toggleFavorite(Request $request, $id)
     {
+        $post = Post::findOrFail($id);
         $request->user()->posts()->toggle($post->id);
         return $this->apiResponse(message: 'liked');
     }

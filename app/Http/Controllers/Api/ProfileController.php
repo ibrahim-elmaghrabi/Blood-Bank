@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Client;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Mobile\Auth\ClientRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\ProfileResource;
-use App\Http\Requests\Mobile\ProfileRequest;
 use App\Http\Requests\Mobile\changePasswordRequest;
 
 class ProfileController extends Controller
@@ -18,12 +18,12 @@ class ProfileController extends Controller
         return $this->success(message: 'Success', data: profileResource::make($client));
     }
 
-    public function updateData(clientRequest $request)
+    public function updateData(ClientRequest $request)
     {
         $data = $request->validated();
         $client = Client::find(auth()->id());
         $client->update($data);
-        return $this->apiResponse(1, 'Data Updated Successfully');
+        return $this->success('Data Updated Successfully');
     }
 
     public function changePassword(changePasswordRequest $request)

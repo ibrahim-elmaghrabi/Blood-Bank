@@ -19,9 +19,10 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             GovernorateSeeder::class,
             CitySeeder::class,
-            UserSeeder::class,
             PostSeeder::class,
-            DonationRequestSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

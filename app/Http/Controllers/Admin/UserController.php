@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role  ;
 use App\Http\Requests\Admin\UserRequest;
@@ -12,16 +11,16 @@ class UserController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('permission:user-list' , ['only' => ['index']] );
-         $this->middleware('permission:user-create' , ['only' => ['create' , 'store']] );
-         $this->middleware('permission:user-edit' , ['only' => ['edit' , 'update']] );
-         $this->middleware('permission:user-delete' , ['only' => ['destroy']]);
+         $this->middleware('permission:users-list', ['only' => ['index']]);
+         $this->middleware('permission:users-create', ['only' => ['create' , 'store']]);
+         $this->middleware('permission:users-edit', ['only' => ['edit' , 'update']]);
+         $this->middleware('permission:users-delete', ['only' => ['destroy']]);
     }
 
     public function index()
     {
         $users = User::paginate(20);
-        return view('admin.users.index', ['users' => $users]);
+        return view('admin.users.index', compact('users'));
     }
 
     public function create()
@@ -40,7 +39,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::paginate(20);
-        return view('admin.users.edit', ['user' => $user , 'roles' => $roles]);
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     public function update(UserRequest $request, User $user)

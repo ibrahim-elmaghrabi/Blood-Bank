@@ -9,9 +9,9 @@ class ClientController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('permission:client-list', ['only' => ['index']]);
-         $this->middleware('permission:client-delete', ['only' => ['destroy']]);
-         $this->middleware('permission:client-updateStatus', ['only' => ['updateStatus']]);
+         $this->middleware('permission:clients-list', ['only' => ['index']]);
+         $this->middleware('permission:clients-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:clients-updateStatus', ['only' => ['updateStatus']]);
     }
 
     public function index()
