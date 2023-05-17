@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\Web\Auth;
 
-use App\Models\City;
-use App\Models\Client;
-use App\Models\BloodType;
-use App\Models\Governorate;
+use App\Models\{City, Client, BloodType, Governorate};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Web\Auth\RegisterRequest;
+use App\Http\Requests\Web\Auth\ClientRequest;
 
 class RegisterController extends Controller
 {
@@ -18,17 +15,11 @@ class RegisterController extends Controller
     }
 
     public function create(Request $request)
-      {
+    {
         $bloodTypes = BloodType::all();
         $governorates = Governorate::get(["name","id"]);
-        $cities = City::where("governorate_id", $request->governorate_id)
-                    ->get(["name","id"]);
-        return view('frontend.create-account',
-         [
-          'bloodTypes' => $bloodTypes ,
-          'governorates' => $governorates ,
-           'cities'       =>$cities ,
-        ]);
+        $cities = City::where("governorate_id",$request->governorate_id)->get(["name","id"]);
+        return view('frontend.create_account', compact('bloodTypes', 'governorates', 'cities'));
     }
 
     public function fetchCity(Request $request)
@@ -37,11 +28,15 @@ class RegisterController extends Controller
         return response()->json($data);
     }
 
-      public function store(RegisterRequest $request)
+    public function store(ClientRequest $request)
     {
-        $client = Client::create($request->validated());
-        auth()->guard('client-web')->login($client);
-        return redirect()->route('clients.home')->with('status', 'Account Created Successfully');
+        $data = $request->validated();
+        $client = Client::create($data);
+        if (! $client ){
+            return back()->with('wrong data');
+        } else {
+            auth()->guard('client-web')->login($client);
+            return redirect()->route('clients.home')->with('status', 'Account Created Successfully');
+        }
     }
-
 }

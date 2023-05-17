@@ -1,6 +1,4 @@
-@extends('frontend.layouts.master',[
-'bodyClass' => 'create'
-])
+@extends('frontend.layouts.master', ['bodyClass'=> 'create'])
 @section('content')
 <div class="form">
     <div class="container">

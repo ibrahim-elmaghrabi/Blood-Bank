@@ -30,7 +30,7 @@ class ResetPasswordController extends Controller
             $user->pin_code = $code;
             $user->save();
             Mail::to($user->email)->send(new ResetPassword($user));
-            return view('frontend.reset-password');
+            return view('frontend.reset_password');
         } else {
             return back()->with('status', 'email not found');
         }

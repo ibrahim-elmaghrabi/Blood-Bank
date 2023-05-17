@@ -1,6 +1,4 @@
-@extends('frontend.layouts.master',[
-'bodyClass' => 'article-details'
-])
+@extends('frontend.layouts.master', ['bodyClass' => 'article-details'])
 @section('content')
 <!--inside-article-->
 <div class="inside-article">
@@ -18,7 +16,7 @@
             <div class="icon col-6">
                 <button type="button">
                     <i id="{{ $post->id }}" onclick="toggleFavourite(this)" class="far fa-heart
-                                {{ (in_array($post->id , $clientPosts)) ? 'redHeart' : 'whiteHeart' }}">
+                           {{ (in_array($post->id , $clientPosts)) ? 'redHeart' : 'whiteHeart' }}">
                     </i>
                 </button>
             </div>

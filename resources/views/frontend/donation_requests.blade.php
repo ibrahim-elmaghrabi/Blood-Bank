@@ -1,6 +1,4 @@
-@extends('frontend.layouts.master',[
-    'bodyClass' => 'donation-requests'
-])
+@extends('frontend.layouts.master', ['bodyClass' => 'donation-requests'])
 @section('content')
 <div class="all-requests">
     <div class="container">

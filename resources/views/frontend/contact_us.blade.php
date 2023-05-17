@@ -1,6 +1,4 @@
-@extends('frontend.layouts.master',[
-    'bodyClass' => 'contact-us'
-])
+@extends('frontend.layouts.master',['bodyClass'=> 'contact-us'])
 @inject('settings','App\Models\Setting')
 @section('content')
 <div class="contact-now">

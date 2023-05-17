@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Models\Post;
-use App\Models\Contact;
-use App\Models\Setting;
+use App\Models\{Post, BloodType, City};
 use Illuminate\Http\Request;
 use App\Models\DonationRequest;
 use App\Http\Controllers\Controller;
-use App\Models\BloodType;
-use App\Models\City;
 
 class MainController extends Controller
 {
@@ -18,7 +14,7 @@ class MainController extends Controller
         $this->middleware('auth:client-web', ['only' => 'toggleFav']);
     }
 
-    public function home(Request $request)
+    public function index(Request $request)
     {
         if (auth()->guard('client-web')->check()) {
             $clientPosts = auth()->guard('client-web')->user()->posts()->pluck('posts.id')->toArray();
@@ -38,13 +34,7 @@ class MainController extends Controller
         $bloodTypes = BloodType::all();
         $cities = City::all();
 
-        return view('frontend.index', [
-            'posts' => $posts,
-            'donations' => $donations,
-            'bloodTypes' => $bloodTypes,
-            'cities' => $cities,
-            'clientPosts' => $clientPosts,
-        ]);
+        return view('frontend.index', compact('posts', 'donations', 'bloodTypes', 'cities', 'clientPosts'));
     }
 
     public function toggleFav(Request $request)
@@ -54,37 +44,13 @@ class MainController extends Controller
         return $this->apiResponse(1, 'Success', $toggle);
     }
 
-    public function aboutUs()
-    {
-        return view('frontend.who-are-us');
-    }
 
-    public function contactUs()
-    {
-        return view('frontend.contact-us');
-    }
+    // public function settings()
+    // {
+    //     $settings = Setting::all();
+    //     return view('frontend.contact-us', ['settings' => $settings]);
+    // }
 
-    public function settings()
-    {
-        $settings = Setting::all();
-        return view('frontend.contact-us', ['settings' => $settings]);
-    }
 
-    public function ClientMessage(Request $request)
-    {
-        $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'subject' => 'required',
-            'message' => 'required'
-        ]);
-        Contact::create($data);
-        return back()->with('status', 'تم ارسال الرسالة بنجاح سوف نتواصل معكم قريبا');
-    }
 
-    public function aboutApp()
-    {
-        return view('frontend.aboutBloodBank');
-    }
 }

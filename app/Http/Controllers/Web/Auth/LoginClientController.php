@@ -16,7 +16,7 @@ class LoginClientController extends Controller
 
     public function LoginForm()
     {
-        return view('frontend.signin-account');
+        return view('frontend.sign_in_account');
     }
 
      public function Login(LoginRequest $request)

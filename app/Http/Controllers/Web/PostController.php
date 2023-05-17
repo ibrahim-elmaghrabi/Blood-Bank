@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Models\Post;
+use App\Models\{Post, Category};
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Traits\HttpResponse;
 
 class PostController extends Controller
@@ -16,6 +15,7 @@ class PostController extends Controller
     {
         $this->middleware('auth:client-web', ['only' => ['toggleFav']]);
     }
+
     public function index(Request $request)
     {
         if (auth()->guard('client-web')->check()) {
@@ -34,16 +34,11 @@ class PostController extends Controller
                 });
             }
         })->paginate(3);
-        $categories = Category::all();
-        return view(
-            'frontend.articles',
-            ['posts' => $posts, 'categories' => $categories, 'clientPosts' => $clientPosts]
-        );
+        $categories = Category::get();
+        return view('frontend.articles', compact('posts', 'categories', 'clientPosts'));
     }
 
-
-
-    public function show($id)
+    public function show(Post $post)
     {
         if (auth()->guard('client-web')->check()) {
             $clientPosts = auth()->guard('client-web')->user()->posts()->pluck('posts.id')->toArray();
@@ -51,10 +46,6 @@ class PostController extends Controller
             $clientPosts = [];
         }
         $posts = Post::latest()->take(5)->get();
-        return view('frontend.article-details', [
-            'post' => Post::findOrFail($id),
-            'posts' => $posts,
-            'clientPosts' => $clientPosts
-        ]);
+        return view('frontend.article_details', compact('post', 'posts', 'clientPosts'));
     }
 }

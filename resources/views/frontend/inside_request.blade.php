@@ -1,6 +1,4 @@
-@extends('frontend.layouts.master',[
-'bodyClass' => 'inside-request'
-])
+@extends('frontend.layouts.master', ['bodyClass' => 'inside-request'])
 @section('content')
 <div class="ask-donation">
     <div class="container">
@@ -135,9 +133,8 @@
 </script>
 <script src="{{  asset('js/main.js') }}"></script>
 @endpush
- 
-        
-       
-        
-     
-      
+
+
+
+
+

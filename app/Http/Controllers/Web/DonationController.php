@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Models\City;
-use App\Models\BloodType;
-use App\Models\Governorate;
+use App\Models\{City, BloodType, Governorate, DonationRequest};
 use Illuminate\Http\Request;
-use App\Models\DonationRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\DonationRequestRequest;
 
 class DonationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:client-web', ['only' => ['addDonation', 'store']]);
+        $this->middleware('auth:client-web', ['only' => ['create', 'store']]);
     }
 
     public function index(Request $request)
     {
         $donations = DonationRequest::where(function ($query) use ($request) {
-
         if ($request->has('city_id')) {
             $query->where('city_id', $request->city_id);
         }
@@ -27,53 +24,36 @@ class DonationController extends Controller
             $query->where('blood_type_id', $request->blood_type_id);
         }
         })->paginate(5);
-        $bloodTypes= BloodType::paginate(20);
+        $bloodTypes= BloodType::get();
         $cities = City::get();
 
-        return view('frontend.donation-requests', compact('donations', 'bloodTypes', 'cities'));
+        return view('frontend.donation_requests', compact('donations', 'bloodTypes', 'cities'));
     }
 
-
-    public function addDonation(Request $request)
+    public function create(Request $request)
     {
-        $bloodTypes= BloodType::all();
+        $bloodTypes= BloodType::get();
         $governorates= Governorate::get(["name","id"]);
         $cities = City::where("governorate_id", $request->governorate_id)->get(["name","id"]);
-        return view('frontend.create-donation', compact('bloodTypes', 'governorates', 'cities'));
+        return view('frontend.create_donation', compact('bloodTypes', 'governorates', 'cities'));
+    }
+
+    public function store(DonationRequestRequest $request)
+    {
+        $data = $request->validated();
+        DonationRequest::create($data + ['client_id'=>  auth('client-web')->id()]);
+        return redirect()->route('clients.home')->with('status', 'Donation Created SuccessFully');
+    }
+
+    public function show(DonationRequest $donation)
+    {
+        return view('frontend.inside_request', compact('donation'));
     }
 
     public function fetchCity(Request $request)
     {
-         $data['cities'] = City::where('governorate_id', $request->governorate_id)->get(['name', 'id']);
-         return response()->json($data);
+        $data['cities'] = City::where('governorate_id', $request->governorate_id)->get(['name', 'id']);
+        return response()->json($data);
     }
-
-    public function store(Request $request)
-    {
-            $data = $request->validate([
-                'name' => 'required',
-                'phone' => 'required',
-                'age' => 'required',
-                'city_id' => 'required',
-                'details' => 'required',
-                'blood_type_id' => 'required',
-                'hospital_name' => 'required',
-                'hospital_address' => 'required',
-                'bags_num' => 'required',
-
-            ]);
-            $data['client_id'] = auth('client-web')->user()->id;
-            DonationRequest::create($data);
-            return redirect()->route('clients.home')->with('status', 'Donation Created SuccessFully');
-
-    }
-
-
-
-    public function show(DonationRequest $donationRequest)
-    {
-        return view('frontend.inside-request', compact('donationRequest'));
-    }
-
 
 }

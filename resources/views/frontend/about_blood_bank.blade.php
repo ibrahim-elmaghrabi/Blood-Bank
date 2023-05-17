@@ -1,6 +1,4 @@
-@extends('frontend.layouts.master',[
-'bodyClass' => 'who-are-us'
-])
+@extends('frontend.layouts.master', ['bodyClass' => 'who-are-us'])
 @inject('settings','App\Models\Setting')
 @section('content')
 <!--inside-article-->
